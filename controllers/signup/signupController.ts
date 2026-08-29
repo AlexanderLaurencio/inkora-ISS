@@ -22,6 +22,6 @@ export default async function signupController(req: Request, res: Response, next
 
     } catch(error) {
         console.log(error);
-        res.status(500).end("Error receiving profile image")
+        res.status(500).end("Error storing the image. Maybe the file already exists.")
     }
 };
