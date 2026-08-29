@@ -1,4 +1,4 @@
-import express, { NextFunction, type Express, type Request, type Response } from 'express';
+import { type NextFunction, type Request, type Response } from 'express';
 import fs from "node:fs/promises"
 
 export default async function signupController(req: Request, res: Response, next: NextFunction) {
@@ -11,16 +11,17 @@ export default async function signupController(req: Request, res: Response, next
 
         let userData: UserData = req.body;
 
-        await fs.mkdir("./userImages/" + userData.username);
-
         let buffer = Buffer.from(userData.profileImage,"base64");
 
-        await fs.writeFile("./userImages/" + userData.username + "/" + userData.username, buffer);
+        let imagePath = userData.username + "/" + `${userData.username}-profileimage.jpg`;
 
-        res.status(200).end("Profile image created successfully");
+        await fs.mkdir("userImages/" + userData.username);
+        await fs.writeFile("./userImages/" + imagePath, buffer);
+
+        res.status(200).end("http://localhost:3200/" + imagePath);
 
     } catch(error) {
-        console.log("Error receiving profile image",error);
+        console.log(error);
         res.status(500).end("Error receiving profile image")
     }
-}
+};
