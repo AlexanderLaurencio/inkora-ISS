@@ -10,4 +10,12 @@ const port = 3200;
 app.use(cors({"origin": INKORA_BACKEND, "methods": ["POST","DELETE","PUT"]}));
 app.use("./signup", express.json());
 
-app.post("/signup", signupController)
+app.post("/signup", signupController);
+
+app.listen(port, (error) => {
+    if (error) {
+        console.log("Error listeting to port" + port, error)
+    } else {
+        console.log("Server listening on port", port)
+    }
+});
