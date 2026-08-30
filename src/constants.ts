@@ -1,0 +1,1 @@
+export const INKORA_BACKEND = "http://localhost:3100"
