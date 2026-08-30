@@ -25,7 +25,7 @@ describe("Testing app endpoints", () => {
         });
 
         //I don't assert that the directory exists because if the profile image does the directory does as well
-        expect(doesFileExist("./userImages/" + signupMockData.username + "/" + `${signupMockData.username}-profileimage.jpg`)) ;
+        expect(doesFileExist("./userImages/" + signupMockData.username + "/" + `${signupMockData.username}-profileimage.jpg`)).toBeTruthy()
 
 
     })

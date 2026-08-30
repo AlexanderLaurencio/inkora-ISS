@@ -1,5 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express';
-import fs from "node:fs/promises"
+import createImagePath from '../../utils/createImagePath/createImagePath.ts';
+import singupService from '../../services/signup/signupService.ts';
 
 export default async function signupController(req: Request, res: Response, next: NextFunction) {
     try {
@@ -10,18 +11,14 @@ export default async function signupController(req: Request, res: Response, next
         }
 
         let userData: UserData = req.body;
+        let profileImagePath = createImagePath(userData.username);
+        
+        await singupService(userData.username, userData.profileImage);
 
-        let buffer = Buffer.from(userData.profileImage,"base64");
-
-        let imagePath = userData.username + "/" + `${userData.username}-profileimage.jpg`;
-
-        await fs.mkdir("userImages/" + userData.username);
-        await fs.writeFile("./userImages/" + imagePath, buffer);
-
-        res.status(200).end("http://localhost:3200/" + imagePath);
+        res.status(200).end("http://localhost:3200/" + profileImagePath);
 
     } catch(error) {
         console.log(error);
-        res.status(500).end("Error storing the image. Maybe the file already exists.")
+        res.status(500).end(error)
     }
 };
