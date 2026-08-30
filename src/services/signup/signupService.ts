@@ -2,7 +2,7 @@ import createImagePath from "../../utils/createImagePath/createImagePath.js";
 import doesFileExist from "../../utils/doesFileExist/doesFileExist.js";
 import fs from "node:fs/promises"
 
-export default async function singupService(username: string, profileImage: string) {
+export default async function signupService(username: string, profileImage: string) {
     try {
         let buffer = Buffer.from(profileImage, "base64");
 
