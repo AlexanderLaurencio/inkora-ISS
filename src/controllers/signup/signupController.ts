@@ -19,6 +19,6 @@ export default async function signupController(req: Request, res: Response, next
 
     } catch(error) {
         console.log(error);
-        res.status(500).end(error)
+        res.status(500).end(`${error}`)
     }
 };
