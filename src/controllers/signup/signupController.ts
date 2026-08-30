@@ -18,7 +18,8 @@ export default async function signupController(req: Request, res: Response, next
         res.status(200).end("http://localhost:3200/" + profileImagePath);
 
     } catch(error) {
+        let err = error as Error;
         console.log(error);
-        res.status(500).end(`${error}`)
+        res.status(500).end(err.message)
     }
 };

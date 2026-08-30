@@ -18,7 +18,7 @@ export default async function signupService(username: string, profileImage: stri
 
         await fs.writeFile("./userImages/" + profileImagePath, buffer);
     } catch(error) {
-        console.log(error);
-        throw new Error(`${error}`)
+        let err = error as Error;
+        throw new Error(err.message)
     }
 };
